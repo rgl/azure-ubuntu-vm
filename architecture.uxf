@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>320</y>
+      <w>230</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azurerm_virtual_machine&gt;&gt;
+name=app
+image=ubuntu 18.04
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>150</y>
+      <w>580</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azurerm_virtual_network&gt;&gt;
+name=example
+address_space=10.1.0.0/16
+lt=..
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>230</y>
+      <w>540</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azurerm_subnet&gt;&gt;
+name=backend
+address_prefix=10.1.1.0/24
+lt=..</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>80</y>
+      <w>800</w>
+      <h>460</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azurerm_resource_group&gt;&gt;
+name=rgl-load-balancer-example
+lt=..
+
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>280</x>
+      <y>320</y>
+      <w>160</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azurerm_public_ip&gt;&gt;
+name=app
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>430</x>
+      <y>340</y>
+      <w>90</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>320</y>
+      <w>250</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azurerm_network_interface&gt;&gt;
+name=app
+private_ip_address=10.1.1.4</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>740</x>
+      <y>340</y>
+      <w>50</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;30.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1220</x>
+      <y>300</y>
+      <w>310</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azure-provided name resolution server&gt;&gt;
+&lt;&lt;dhcp server&gt;&gt;
+&lt;&lt;recursive dns resolver&gt;&gt;
+ip=168.63.129.16
+dns_suffix=.internal.cloudapp.net
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>330</y>
+      <w>130</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>:53 (DNS)
+:67 (DHCP)
+lt=()-</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>330</y>
+      <w>140</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-(</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>30</y>
+      <w>1310</w>
+      <h>530</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azure cloud&gt;&gt;
+lt=..
+
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>170</x>
+      <y>330</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=()-
+r1=:80</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1220</x>
+      <y>420</y>
+      <w>310</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;azure-provided metadata server&gt;&gt;
+ip=169.254.169.254
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1110</x>
+      <y>430</y>
+      <w>130</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>:80 (HTTP)
+lt=()-</panel_attributes>
+    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>340</y>
+      <w>140</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-(</panel_attributes>
+    <additional_attributes>10.0;10.0;100.0;110.0;110.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>930</x>
+      <y>410</y>
+      <w>70</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;disk&gt;&gt;
+data
+/dev/sdc</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>410</y>
+      <w>70</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;disk&gt;&gt;
+os
+/dev/sda</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>850</x>
+      <y>410</y>
+      <w>70</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;disk&gt;&gt;
+tmp
+/dev/sdb</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>790</x>
+      <y>380</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>870</x>
+      <y>380</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>380</y>
+      <w>30</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;30.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

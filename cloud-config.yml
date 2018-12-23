@@ -1,0 +1,35 @@
+#cloud-config
+
+# azure ubuntu vm block devices example:
+#
+#   $ lsblk
+#   NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+#   sda       8:0    0   30G  0 disk
+#   ├─sda1    8:1    0 29.9G  0 part /
+#   ├─sda14   8:14   0    4M  0 part
+#   └─sda15   8:15   0  106M  0 part /boot/efi
+#   sdb       8:16   0    7G  0 disk
+#   └─sdb1    8:17   0    7G  0 part /mnt
+#   sdc       8:32   0   10G  0 disk
+#   sr0      11:0    1  628K  0 rom
+#
+#   sdb is the ephemeral disk.
+#   sdc (and above) are the disks specified by azurerm_virtual_machine storage_data_disk resource block.
+
+# see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#disk-setup
+
+disk_setup:
+  /dev/sdc:
+    table_type: mbr
+    layout: # NB "layout: true" fails with "Start sector 0 out of range", so we use an explicit layout line.
+      - [100, 83]
+    overwrite: false
+
+fs_setup:
+  - label: data
+    device: /dev/sdc1
+    filesystem: ext4
+    overwrite: false
+
+mounts:
+  - [/dev/sdc1, /data, ext4, "defaults,discard,nofail", "0", "2"]

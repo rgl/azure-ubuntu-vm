@@ -1,0 +1,8 @@
+.terraform/
+terraform.tfstate*
+.vagrant/
+shared/
+secrets.*
+SECRETS.*
+*.tmp.png
+*.log
