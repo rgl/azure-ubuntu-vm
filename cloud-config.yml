@@ -14,7 +14,7 @@
 #   sr0      11:0    1  628K  0 rom
 #
 #   sdb is the ephemeral disk.
-#   sdc (and above) are the disks specified by azurerm_virtual_machine storage_data_disk resource block.
+#   sdc (and above) are the disks specified by azurerm_linux_virtual_machine storage_data_disk resource block.
 
 # see https://cloudinit.readthedocs.io/en/latest/topics/examples.html#disk-setup
 

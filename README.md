@@ -21,6 +21,7 @@ List the subscriptions and select the current one if the default is not OK:
 ```bash
 az account list
 az account set --subscription=<id>
+az account show
 ```
 
 Review `main.tf` and maybe change the `location` variable.
