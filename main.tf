@@ -1,9 +1,22 @@
 terraform {
-  required_version = ">= 0.12"
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 2.23.0"
+    }
+    random = {
+      source = "hashicorp/random"
+      version = "~> 2.3.0"
+    }
+    template = {
+      source = "hashicorp/template"
+      version = "~> 2.1.2"
+    }
+  }
+  required_version = ">= 0.13"
 }
 
 provider "azurerm" {
-  version = "~> 2.0"
   features {}
 }
 
@@ -71,7 +84,7 @@ resource "azurerm_subnet" "backend" {
   name                 = "backend"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
-  address_prefix       = "10.1.1.0/24"
+  address_prefixes     = ["10.1.1.0/24"]
 }
 
 resource "azurerm_public_ip" "app" {
