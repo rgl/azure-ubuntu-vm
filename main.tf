@@ -61,17 +61,17 @@ resource "random_id" "example" {
   byte_length = 10
 }
 
-# resource "azurerm_storage_account" "diagnostics" {
-#   # NB this name must be globally unique as all the azure storage accounts share the same namespace.
-#   # NB this name must be at most 24 characters long.
-#   name = "diag${random_id.example.hex}"
+resource "azurerm_storage_account" "diagnostics" {
+  # NB this name must be globally unique as all the azure storage accounts share the same namespace.
+  # NB this name must be at most 24 characters long.
+  name = "diag${random_id.example.hex}"
 
-#   resource_group_name      = azurerm_resource_group.example.name
-#   location                 = azurerm_resource_group.example.location
-#   account_kind             = "StorageV2"
-#   account_tier             = "Standard"
-#   account_replication_type = "LRS"
-# }
+  resource_group_name      = azurerm_resource_group.example.name
+  location                 = azurerm_resource_group.example.location
+  account_kind             = "StorageV2"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}
 
 resource "azurerm_virtual_network" "example" {
   name                = "example"
@@ -202,10 +202,9 @@ resource "azurerm_linux_virtual_machine" "app" {
     version   = "latest"
   }
 
-  # boot_diagnostics {
-  #   enabled     = true
-  #   storage_uri = azurerm_storage_account.diagnostics.primary_blob_endpoint
-  # }
+  boot_diagnostics {
+    storage_account_uri = azurerm_storage_account.diagnostics.primary_blob_endpoint
+  }
 
   # depends_on = [
   #   azurerm_managed_disk.app_data,
