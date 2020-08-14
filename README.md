@@ -38,7 +38,7 @@ Launch the example:
 make terraform-apply
 ```
 
-At VM initialization time [cloud-init](https://cloudinit.readthedocs.io/en/latest/index.html) will partition, format the data file system, and run the `provision-app.sh` script to launch the example application.
+At VM initialization time [cloud-init](https://cloudinit.readthedocs.io/en/latest/index.html) will run the `provision-app.sh` script to launch the example application.
 
 After VM initialization is done (check the boot diagnostics serial log for cloud-init entries), test the `app` endpoint:
 
