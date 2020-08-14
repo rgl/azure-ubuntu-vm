@@ -45,3 +45,9 @@ After VM initialization is done (check the boot diagnostics serial log for cloud
 ```bash
 wget -qO- "http://$(terraform output app_ip_address)/test"
 ```
+
+And open a shell inside the VM:
+
+```bash
+ssh "$(terraform output app_ip_address)"
+```

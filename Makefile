@@ -13,6 +13,7 @@ terraform-apply:
 	TF_LOG=TRACE \
 	TF_LOG_PATH=terraform.log \
 	TF_VAR_admin_ssh_key_data="$(shell cat ~/.ssh/id_rsa.pub)" \
+	TF_VAR_admin_username="$$USERNAME" \
 	time terraform apply
 
 terraform-destroy:
