@@ -4,7 +4,7 @@ set -euxo pipefail
 # install node LTS.
 # see https://github.com/nodesource/distributions#debinstall
 apt-get install -y curl
-curl -sL https://deb.nodesource.com/setup_12.x | bash
+curl -sL https://deb.nodesource.com/setup_16.x | bash
 apt-get install -y nodejs
 node --version
 npm --version
@@ -30,10 +30,11 @@ function createRequestListener(metadata) {
         const serverAddress = \`\${request.socket.localAddress}:\${request.socket.localPort}\`;
         const clientAddress = \`\${request.socket.remoteAddress}:\${request.socket.remotePort}\`;
         const message = \`VM Name: \${metadata.compute.name}
+Node.js Version: \${process.versions.node}
 Server Address: \${serverAddress}
 Client Address: \${clientAddress}
 Request URL: \${request.url}
-\`; 
+\`;
         console.log(message);
         response.writeHead(200, {"Content-Type": "text/plain"});
         response.write(message);
