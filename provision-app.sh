@@ -49,7 +49,7 @@ function main(metadata, port) {
 
 // see https://docs.microsoft.com/en-us/azure/virtual-machines/linux/instance-metadata-service#retrieving-all-metadata-for-an-instance
 http.get(
-    "http://169.254.169.254/metadata/instance?api-version=2017-08-01",
+    "http://169.254.169.254/metadata/instance?api-version=2021-02-01",
     {
         headers: {
             Metadata: "true"
