@@ -206,11 +206,14 @@ resource "azurerm_linux_virtual_machine" "app" {
     storage_account_type = "StandardSSD_LRS" # Locally Redundant Storage.
   }
 
+  # use ubuntu 20.04 (focal fossa).
+  # NB skus with the -gen2 suffix are hyper-v generation 2 virtual machines.
   # see https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage
+  # see az vm image list -p canonical -o table --all >images.txt
   source_image_reference {
     publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-gen2"
     version   = "latest"
   }
 
