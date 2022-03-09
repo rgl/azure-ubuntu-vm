@@ -50,4 +50,11 @@ And open a shell inside the VM:
 
 ```bash
 ssh "$(terraform output app_ip_address)"
+exit
+```
+
+Destroy the example:
+
+```bash
+make terraform-destroy
 ```
