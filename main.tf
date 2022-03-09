@@ -32,6 +32,7 @@ variable "resource_group_name" {
   default = "rgl-ubuntu-vm-example"
 }
 
+# NB this user cannot be "admin" nor "test" nor whatever Azure decided to deny.
 variable "admin_username" {
   default = "rgl"
 }
