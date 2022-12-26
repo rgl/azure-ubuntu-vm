@@ -1,17 +1,17 @@
 # see https://github.com/hashicorp/terraform
 terraform {
-  required_version = "1.1.7"
+  required_version = "1.3.6"
   required_providers {
     # see https://registry.terraform.io/providers/hashicorp/random
     random = {
       source  = "hashicorp/random"
-      version = "3.1.0"
+      version = "3.4.3"
     }
     # see https://github.com/terraform-providers/terraform-provider-azurerm
     # see https://registry.terraform.io/providers/hashicorp/azurerm
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "2.98.0"
+      version = "3.37.0"
     }
   }
 }
@@ -23,7 +23,7 @@ provider "azurerm" {
 # NB you can test the relative speed from you browser to a location using https://azurespeedtest.azurewebsites.net/
 # get the available locations with: az account list-locations --output table
 variable "location" {
-  default = "France Central" # see https://azure.microsoft.com/en-us/global-infrastructure/france/
+  default = "northeurope"
 }
 
 # NB this name must be unique within the Azure subscription.
@@ -206,14 +206,14 @@ resource "azurerm_linux_virtual_machine" "app" {
     storage_account_type = "StandardSSD_LRS" # Locally Redundant Storage.
   }
 
-  # use ubuntu 20.04 (focal fossa).
+  # use ubuntu 22.04 (jammy jellyfish).
   # NB skus with the -gen2 suffix are hyper-v generation 2 virtual machines.
   # see https://docs.microsoft.com/en-us/azure/virtual-machines/linux/cli-ps-findimage
   # see az vm image list -p canonical -o table --all >images.txt
   source_image_reference {
     publisher = "Canonical"
-    offer     = "0001-com-ubuntu-server-focal"
-    sku       = "20_04-lts-gen2"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
 
