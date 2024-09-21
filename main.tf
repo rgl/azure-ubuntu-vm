@@ -7,6 +7,12 @@ terraform {
       source  = "hashicorp/random"
       version = "3.6.3"
     }
+    # see https://registry.terraform.io/providers/hashicorp/cloudinit
+    # see https://github.com/hashicorp/terraform-provider-cloudinit
+    cloudinit = {
+      source  = "hashicorp/cloudinit"
+      version = "2.3.5"
+    }
     # see https://github.com/terraform-providers/terraform-provider-azurerm
     # see https://registry.terraform.io/providers/hashicorp/azurerm
     azurerm = {
@@ -165,7 +171,7 @@ resource "azurerm_network_interface_security_group_association" "app" {
 # NB cloud-init executes **all** these parts regardless of their result. they
 #    should be idempotent.
 # NB the output is saved at /var/log/cloud-init-output.log
-data "template_cloudinit_config" "app" {
+data "cloudinit_config" "app" {
   part {
     content_type = "text/cloud-config"
     content = <<-EOF
@@ -191,7 +197,7 @@ resource "azurerm_linux_virtual_machine" "app" {
   admin_password                  = var.admin_password
   disable_password_authentication = false
 
-  user_data = data.template_cloudinit_config.app.rendered
+  user_data = data.cloudinit_config.app.rendered
 
   admin_ssh_key {
     username   = var.admin_username
