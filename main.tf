@@ -44,7 +44,7 @@ variable "admin_username" {
 }
 
 variable "admin_password" {
-  default = "HeyH0Password"
+  default   = "HeyH0Password"
   sensitive = true
 }
 
@@ -191,7 +191,7 @@ resource "azurerm_linux_virtual_machine" "app" {
   resource_group_name   = azurerm_resource_group.example.name
   location              = azurerm_resource_group.example.location
   network_interface_ids = [azurerm_network_interface.app.id]
-  size                  = "Standard_B1s"
+  size                  = "Standard_B1s" # 1 vCPU. 1 GB RAM.
 
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password
@@ -251,5 +251,5 @@ resource "azurerm_virtual_machine_data_disk_attachment" "app_data" {
   virtual_machine_id = azurerm_linux_virtual_machine.app.id
   managed_disk_id    = azurerm_managed_disk.app_data.id
   lun                = 0
-  caching            = "ReadWrite"       # TODO is this advisable?
+  caching            = "ReadWrite" # TODO is this advisable?
 }
