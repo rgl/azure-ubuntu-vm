@@ -4,7 +4,7 @@ set -euxo pipefail
 # install node LTS.
 # see https://github.com/nodesource/distributions#debinstall
 apt-get install -y curl
-curl -sL https://deb.nodesource.com/setup_18.x | bash
+curl -sL https://deb.nodesource.com/setup_20.x | bash
 apt-get install -y nodejs
 node --version
 npm --version

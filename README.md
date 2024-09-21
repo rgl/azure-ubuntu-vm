@@ -10,18 +10,24 @@ Install the tools:
 ./provision-tools.sh
 ```
 
-Login into azure-cli:
+Login into azure:
 
 ```bash
 az login
 ```
 
-List the subscriptions and select the current one if the default is not OK:
+List the subscriptions:
 
 ```bash
 az account list --all
-az account set --subscription=<id>
 az account show
+```
+
+Set the subscription:
+
+```bash
+export ARM_SUBSCRIPTION_ID="<YOUR-SUBSCRIPTION-ID>"
+az account set --subscription "$ARM_SUBSCRIPTION_ID"
 ```
 
 Review `main.tf` and maybe change the `location` variable.
