@@ -1,23 +1,23 @@
 # see https://github.com/hashicorp/terraform
 terraform {
-  required_version = "1.9.6"
+  required_version = "1.12.2"
   required_providers {
     # see https://registry.terraform.io/providers/hashicorp/random
     random = {
       source  = "hashicorp/random"
-      version = "3.6.3"
+      version = "3.7.2"
     }
     # see https://registry.terraform.io/providers/hashicorp/cloudinit
     # see https://github.com/hashicorp/terraform-provider-cloudinit
     cloudinit = {
       source  = "hashicorp/cloudinit"
-      version = "2.3.5"
+      version = "2.3.7"
     }
     # see https://github.com/terraform-providers/terraform-provider-azurerm
     # see https://registry.terraform.io/providers/hashicorp/azurerm
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "4.3.0"
+      version = "4.37.0"
     }
   }
 }
@@ -174,7 +174,7 @@ resource "azurerm_network_interface_security_group_association" "app" {
 data "cloudinit_config" "app" {
   part {
     content_type = "text/cloud-config"
-    content = <<-EOF
+    content      = <<-EOF
     #cloud-config
     runcmd:
       - echo 'Hello from cloud-config runcmd!'
