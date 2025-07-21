@@ -31,7 +31,7 @@ terraform-destroy-app:
 	time terraform destroy -target azurerm_linux_virtual_machine.app
 
 architecture.png: architecture.uxf
-	java -jar ~/Applications/Umlet/umlet.jar \
+	umlet \
 		-action=convert \
 		-format=png \
 		-filename=$< \

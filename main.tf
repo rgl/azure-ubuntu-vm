@@ -55,6 +55,10 @@ output "app_ip_address" {
   value = azurerm_public_ip.app.ip_address
 }
 
+output "app_ipv6_ip_address" {
+  value = azurerm_public_ip.app_ipv6.ip_address
+}
+
 resource "azurerm_resource_group" "example" {
   name     = var.resource_group_name # NB this name must be unique within the Azure subscription.
   location = var.location
@@ -83,7 +87,7 @@ resource "azurerm_storage_account" "diagnostics" {
 
 resource "azurerm_virtual_network" "example" {
   name                = "example"
-  address_space       = ["10.1.0.0/16"]
+  address_space       = ["10.1.0.0/16", "fd00::/48"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 }
@@ -92,7 +96,7 @@ resource "azurerm_subnet" "backend" {
   name                 = "backend"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.1.1.0/24"]
+  address_prefixes     = ["10.1.1.0/24", "fd00::/64"] # NB In Azure, an IPv6 subnet must use a 64 prefix length.
 }
 
 resource "azurerm_public_ip" "app" {
@@ -100,6 +104,14 @@ resource "azurerm_public_ip" "app" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   allocation_method   = "Static"
+}
+
+resource "azurerm_public_ip" "app_ipv6" {
+  name                = "app-ipv6"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  allocation_method   = "Static"
+  ip_version          = "IPv6"
 }
 
 resource "azurerm_network_security_group" "app" {
@@ -157,6 +169,16 @@ resource "azurerm_network_interface" "app" {
     subnet_id                     = azurerm_subnet.backend.id
     private_ip_address_allocation = "Static"
     private_ip_address            = "10.1.1.4" # NB Azure reserves the first four addresses in each subnet address range, so do not use those.
+  }
+
+  ip_configuration {
+    name                          = "app_ipv6"
+    primary                       = false
+    public_ip_address_id          = azurerm_public_ip.app_ipv6.id
+    subnet_id                     = azurerm_subnet.backend.id
+    private_ip_address_allocation = "Static"
+    private_ip_address_version    = "IPv6"
+    private_ip_address            = "fd00::4" # NB Azure reserves the first address, so do not use it.
   }
 }
 
