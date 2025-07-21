@@ -49,7 +49,7 @@ At VM initialization time [cloud-init](https://cloudinit.readthedocs.io/en/lates
 After VM initialization is done (check the boot diagnostics serial log for cloud-init entries), test the `app` endpoint:
 
 ```bash
-wget -qO- "http://$(terraform output --raw app_ip_address)/test"
+while ! wget -qO- "http://$(terraform output --raw app_ip_address)/test"; do sleep 3; done
 ```
 
 And open a shell inside the VM:
